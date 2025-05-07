@@ -104,7 +104,8 @@ $ sudo kmodsign sha512 /var/lib/shim-signed/mok/MOK.priv /var/lib/shim-signed/mo
 $ sudo insmod /lib/modules/`uname -r`/kernel/drivers/video/pt3_drv.ko  
 または  
 $ sudo modprobe pt3_drv  
-※modprobeは依存関係を調べて全て組み込む  
+※modprobeは依存関係を調べて全て組み込む
+※modprobe前にdepmodを実行する    
 
 ### DKMS(Dynamic Kernel Module Support)
 DKMSはカーネルアップデート時にカーネルオブジェクトをリビルドし組み込むアプリケーション  
