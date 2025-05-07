@@ -35,7 +35,7 @@ $ make clean
 
 ## オプション指定
 オプション指定する時は  
-/etc/modprobe.d/options-pt3.confを作成し（ファイル名は任意）  
+/etc/modprobe.d/options-pt3.confを作成し  
 options pt3_drv lnb=X lnb_force=X debug=X  
 と記述する  
 lnb   LNBのデフォルト値を指定  
