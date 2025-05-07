@@ -43,8 +43,8 @@ debug メッセージの表示を制御
       7: デバッグ用メッセージも表示  
 
 ## video groupの登録
-userをvideo groupに登録する
-$ sudo gpasswd -a user video
+userをvideo groupに登録する  
+$ sudo gpasswd -a user video  
 
 # linux(ubuntu)セキュアブート
 
