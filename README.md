@@ -72,6 +72,47 @@ MOK managerでEnroll MOKを選択し同じパスワードを入力すること�
 Continueを選ぶと登録せずに終わってしまうので注意  
 
 ### セキュアブート確認
-$ mokutil --sb-state
-または
-sudo dmesg | grep secureboot
+$ mokutil --sb-state  
+または  
+sudo dmesg | grep secureboot  
+
+### MOKのインストールに失敗している時(MOK manager(青い画面)でcontinueを選択してしまった等)]
+既存のキーをshimに登録する  
+$sudo update-secureboot-policy --enroll-key  
+    既に登録済みの時  
+    Nothing to do.  
+    登録されていない時  
+    再起動後に公開キーを登録するためのパスワードの入力を求められる  
+### インストール後にセキュアブートに変更した場合
+新しくMOKを生成  
+$ sudo update-secureboot-policy --new-key  
+出力先は  
+/var/lib/shim-signed/mok/MOK.priv (秘密キー)  
+/var/lib/shim-signed/mok/MOK.der (証明書、公開キー)  
+
+公開キーをshimに登録する  
+$ sudo mokutil --import /var/lib/shim-signed/mok/MOK.der  
+    input password: xxxxx  
+    input password again: xxxxx  
+リブートするとMOK manager(青い画面)が起動するので  
+[Enroll MOK]  
+を選択し、先程設定したパスワードxxxxxを使用し公開キーを登録し再起動する  
+
+### カーネルオブジェクトに署名
+セキュアブート環境では署名していないカーネルオブジェクトはinsmod(modprobe)で失敗するので事前にMOKで署名する  
+$ sudo kmodsign sha512 /var/lib/shim-signed/mok/MOK.priv /var/lib/shim-signed/mok/MOK.der pt3_drv.ko  
+$ sudo insmod /lib/modules/`uname -r`/kernel/drivers/video/pt3_drv.ko  
+または  
+$ sudo modprobe pt3_drv  
+※modprobeは依存関係を調べて全て組み込む  
+
+### DKMS(Dynamic Kernel Module Support)
+DKMSはカーネルアップデート時にカーネルオブジェクトをリビルドし組み込むアプリケーション  
+またセキュアブート環境では自動的にMOKで電子署名をするので自分で署名する必要がない  
+
+### shimバイナリー
+UEFIから起動するローダープログラム  
+セキュアブートの場合、UEFIに組み込まれたMicrosoft公開キーを使用してshimバイナリーのMicrosoft署名が検証される  
+
+### カーネルオブジェクトの署名確認
+modinfo オブジェクト名  例 modinfo pt3_drv  
