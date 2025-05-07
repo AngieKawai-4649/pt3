@@ -1,5 +1,5 @@
 # pt3 Linux driver
-- 変更点 ビルド時のワーニング除去（2箇所）
+- 変更点 ビルド時のワーニング除去（4箇所）
 
 ## ビルド
 $ cd pt3  
@@ -15,6 +15,7 @@ $ sudo modprobe pt3_drv
 
 [DKMSを使用してカーネルに組み込む]  
 $ sudo ${SHELL} ./dkms.install  
+※dkmsを実行後modprobeを行わなくてもリブートすることでカーネルに組み込まれる
 
 組み込みに成功すると/dev/pt3videoXが作成される  
 
@@ -40,6 +41,10 @@ debug メッセージの表示を制御
       0: 出来るだけ表示しない (default)  
       1: pt1と同じ程度表示  
       7: デバッグ用メッセージも表示  
+
+## video groupの登録
+userをvideo groupに登録する
+$ sudo gpasswd -a user video
 
 # linux(ubuntu)セキュアブート
 
