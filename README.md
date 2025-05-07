@@ -1,6 +1,13 @@
 # pt3 Linux driver
 - 変更点 ビルド時のワーニング除去（4箇所）
 
+## DVBドライバーの除去
+Linux標準でロードされるearth_pt3 DVBドライバーをロードしないようにブラックリストに登録する  
+/etc/modprobe.d/blacklist-earth_pt3.conf を作成し  
+blacklist earth_pt3  
+を記述する  
+※PT1、PT2はearth-pt1（ハイフン）なので注意  
+
 ## ビルド
 $ cd pt3  
 $ make
