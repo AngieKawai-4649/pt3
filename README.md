@@ -43,7 +43,7 @@ debug メッセージの表示を制御
 
 # linux(ubuntu)セキュアブート
 
-MOKとは  
+## MOKとは
 Machine Owner Key の略  
 セキュアブート環境では  
 linux(ubuntu)shimバイナリー(UEFIローダー) はMicrosoftが秘密キーで署名している  
@@ -58,6 +58,20 @@ Canonicalの秘密キーを使用して署名することは不可能なので�
 この仕組みがMOKである  
 MOK managerを使用し、linux(ubuntu)shimバイナリーに自分で作成した独自の公開キーを登録することでカーネルオブジェクトのロードに成功する  
 
-※Microsoftが署名したshimバイナリーを用意しているlinuxディストリビュータのみがセキュアブートでインストールできる  
+※Microsoftが署名したshimバイナリーを用意しているlinuxディストリビューションのみがセキュアブートでインストールできる  
 ※UEFIはMicrosoftの公開キーを所持しており、セキュアブート時それを使用してshimの署名を検証する  
-※主にubuntu(Canonical)を例にしたが他ディストリビュータも同様の仕組みでセキュアブートを実現している  
+※主にubuntu(Canonical)を例にしたが他ディストリビューションも同様の仕組みでセキュアブートを実現している  
+
+## セキュアブート環境でのLinux(ubuntu)OSインストール
+インストールの準備画面でサードパーティー製のソフトウェアをインストールするオプションを選択しパスワードを設定する  
+このオプションを選択することでMOK用の公開キー・秘密キーが作成される  
+/var/lib/shim-signed/mok/MOK.priv (秘密鍵)  
+/var/lib/shim-signed/mok/MOK.der (証明書、公開鍵)  
+このパスワードはインストール後リブートで表示されるMOK manager(青い画面) でlinux(ubuntu)shimバイナリーにMOK用公開キーを登録する為のもの  
+MOK managerでEnroll MOKを選択し同じパスワードを入力することで登録完了となる  
+Continueを選ぶと登録せずに終わってしまうので注意  
+
+### セキュアブート確認
+$ mokutil --sb-state
+または
+sudo dmesg | grep secureboot
