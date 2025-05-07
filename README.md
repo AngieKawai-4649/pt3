@@ -9,6 +9,7 @@ blacklist earth_pt3
 ※PT1、PT2はearth-pt1（ハイフン）なので注意  
 
 ## ビルド
+$ git clone https://github.com/AngieKawai-4649/pt3.git  
 $ cd pt3  
 $ make
 
