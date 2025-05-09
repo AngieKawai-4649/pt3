@@ -52,7 +52,7 @@ debug メッセージの表示を制御
 
 ## video groupの登録
 /etc/udev/rules.d/99-pt3.rulesを以下の内容で作成する  
-KERNEL=="pt3video*"  GROUP="video", MODE="0666"  
+KERNEL=="pt3video*"            GROUP="video", MODE="0666"  
 userをvideo groupに登録する  
 $ sudo gpasswd -a user video  
 
