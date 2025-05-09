@@ -51,6 +51,8 @@ debug メッセージの表示を制御
       7: デバッグ用メッセージも表示  
 
 ## video groupの登録
+/etc/udev/rules.d/99-pt3.rulesを以下の内容で作成する  
+KERNEL=="pt3video*"  GROUP="video", MODE="0666"  
 userをvideo groupに登録する  
 $ sudo gpasswd -a user video  
 
@@ -89,7 +91,7 @@ $ mokutil --sb-state
 または  
 sudo dmesg | grep secureboot  
 
-### MOKのインストールに失敗している時(MOK manager(青い画面)でcontinueを選択してしまった等)]
+### MOKのインストールに失敗している時(MOK manager(青い画面)でcontinueを選択してしまった等)
 既存のキーをshimに登録する  
 $sudo update-secureboot-policy --enroll-key  
     既に登録済みの時  
