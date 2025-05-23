@@ -108,11 +108,11 @@ $ sudo update-secureboot-policy --new-key
 
 公開キーをshimに登録する  
 $ sudo mokutil --import /var/lib/shim-signed/mok/MOK.der  
-    input password: xxxxx  
-    input password again: xxxxx  
+    input password: abcde  
+    input password again: abcde  
 リブートするとMOK manager(青い画面)が起動するので  
 [Enroll MOK]  
-を選択し、先程設定したパスワードxxxxxを使用し公開キーを登録し再起動する  
+を選択し、先程設定したワンタイムパスワードabcdeを使用し公開キーを登録し再起動する  
 
 ### カーネルオブジェクトに署名
 セキュアブート環境では署名していないカーネルオブジェクトはinsmod(modprobe)で失敗するので事前にMOKで署名する  
