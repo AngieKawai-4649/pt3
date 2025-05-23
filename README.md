@@ -98,7 +98,8 @@ $sudo update-secureboot-policy --enroll-key
     Nothing to do.  
     登録されていない時  
     再起動後に公開キーを登録するためのパスワードの入力を求められる  
-### インストール後にセキュアブートに変更した場合
+
+### /var/lib/shim-signed/mok/にMOKの公開キー、秘密キーが存在しない時
 新しくMOKを生成  
 $ sudo update-secureboot-policy --new-key  
 出力先は  
